@@ -36,6 +36,7 @@ Clearly not. It's just beginning. And all your help is welcome. But I have some 
 dues to a fixed idea of this library.
 
 So, my idea, for this library, is :
+
 	* No use of CMake (just a Makefile, or a few sub-Makefiles)
 	* No installation required (one of the reasons of the only use of Makefiles)
 	* A cross-plateform library, usable no less than Windows and Linux
