@@ -41,4 +41,4 @@ So, my idea, for this library, is :
 * No installation required (one of the reasons of the only use of Makefiles)
 * A cross-plateform library, usable no less than Windows and Linux
 * No dependencies, or no one which require any installation or a usage of CMake (so don't use Qt or SFML, for example)
-* A library which is a little bit complete (like window creation, event management, use of keys and mouse event, perhaps audio, etc.
+* A library which is a little bit complete (like window creation, event management, use of keys and mouse event, perhaps audio, etc.)
