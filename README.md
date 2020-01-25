@@ -17,7 +17,7 @@ To compile the current project (a temporary form of the library) on Linux, you h
 open the Makefile and set the value of the `Linux` variable at `yes`, before type the command
 `make` in a terminal placed in the "root directory".
 
-### Compile on Windows
+### Compilation on Windows
 
 To compile the current project (a temporary form of the library) on Linux, you have to
 open the Makefile and set the value of the `Linux` variable at `no`, before type the command

@@ -4,6 +4,8 @@
 #include "TypeStyle.hpp"
 #include "FGExcept.hpp"
 
+typedef unsigned int uint;
+
 #if defined(WINDOWS)
 	typedef HWND FGWin;
 	typedef HINSTANCE FGHandler;
@@ -27,9 +29,11 @@ class Window
 	public:
 		// Third argument, "FGWin& win", is useless as fuck, now
 		// ... I guess
-		Window(int style, FGHandler hand, FGWin& win, FGTitle winName);
+		Window(int style, FGHandler hand, FGWin& win, FGTitle winName = "");
 		Window(Window const& src);
 		~Window();
+		
+		inline uint getWindowCount() const { return m_windowCount; }
 		
 		void showThisFuckingWindow();
 	
@@ -42,6 +46,7 @@ class Window
 			MSG m_message;
 			WNDCLASS m_winClass;
 		#endif
+		static uint m_windowCount;
 };
 
 #endif // DEF_WINDOW

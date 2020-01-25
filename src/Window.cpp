@@ -1,5 +1,7 @@
 #include "../include/Window.hpp"
 
+uint Window::m_windowCount = 0;
+
 #if defined(WINDOWS)
 	LRESULT CALLBACK WinConstructCB(HWND win, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
@@ -21,7 +23,14 @@
 
 Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winName(winName), m_handler(hand), m_mainWindow(win)
 {
+	++m_windowCount;
+	
 	#if defined(WINDOWS)
+		std::string className;
+		std::ostringstream ossCN;
+		
+		ossCN << "Window" << m_windowCount;
+		
 		m_mainWindow = win;
 		
 		m_winClass.style = style;
@@ -33,19 +42,22 @@ Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winNa
 		m_winClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 		m_winClass.hbrBackground = (HBRUSH)(1 + COLOR_BTNFACE);
 		m_winClass.lpszMenuName = NULL;
-		m_winClass.lpszClassName = "Window";
+		m_winClass.lpszClassName = ossCN.str().c_str();
 		
 		if(!RegisterClass(&m_winClass))
 			throw _RunExcept("ERROR : Cannot create a new window.");
 			//throw _FGExcept("ERROR : Cannot create a new window.");
 		
-		m_mainWindow = CreateWindow("Window", m_winName, FG::TS::DynamicPos, CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, NULL, NULL, m_handler, NULL);
+		m_mainWindow = CreateWindow(ossCN.str().c_str(), m_winName, FG::TS::DynamicPos, CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, NULL, NULL, m_handler, NULL);
 	#endif
 }
 
-Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow)), src.m_winName) {}
+Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow))) {}
 
-Window::~Window() {}
+Window::~Window()
+{
+	--m_windowCount;
+}
 
 
 void Window::showThisFuckingWindow()

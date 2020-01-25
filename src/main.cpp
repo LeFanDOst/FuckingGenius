@@ -11,6 +11,8 @@ THE_MAIN_IS
 	
 	std::cout << "1" << std::endl;
 	
+	std::cout << myWin.getWindowCount() << std::endl;
+	
 	Window otherWin(myWin);
 	
 	std::cout << "2" << std::endl;
@@ -18,6 +20,9 @@ THE_MAIN_IS
 	otherWin.showThisFuckingWindow();
 	
 	std::cout << "3" << std::endl;
+	
+	std::cout << myWin.getWindowCount() << std::endl;
+	std::cout << otherWin.getWindowCount() << std::endl;
 	
 	//throw _FGExcept("ERREUR");
 	throw _RunExcept("ERREUR");
