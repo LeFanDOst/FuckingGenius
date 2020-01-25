@@ -42,3 +42,13 @@ So, my idea, for this library, is :
 * A cross-plateform library, usable no less than Windows and Linux
 * No dependencies, or no one which require any installation or a usage of CMake (so don't use Qt or SFML, for example)
 * A library which is a little bit complete (like window creation, event management, use of keys and mouse event, perhaps audio, etc.)
+
+## You are an hardworker ?
+
+Take a little pause, a few minutes. I offer some series to see between two programming sessions :
+
+* Warehouse 13
+* Eureka
+* Sherlock (BBC)
+* Merlin (BBC)
+* Doctor Who

@@ -28,7 +28,7 @@ class Window
 		// Third argument, "FGWin& win", is useless as fuck, now
 		// ... I guess
 		Window(int style, FGHandler hand, FGWin& win, FGTitle winName);
-		//Window(Window const& src);
+		Window(Window const& src);
 		~Window();
 		
 		void showThisFuckingWindow();

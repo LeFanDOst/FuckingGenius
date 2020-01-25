@@ -36,13 +36,14 @@ Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winNa
 		m_winClass.lpszClassName = "Window";
 		
 		if(!RegisterClass(&m_winClass))
-			throw _FGExcept("ERROR : Cannot create a new window.");
+			throw _RunExcept("ERROR : Cannot create a new window.");
+			//throw _FGExcept("ERROR : Cannot create a new window.");
 		
 		m_mainWindow = CreateWindow("Window", m_winName, FG::TS::DynamicPos, CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, NULL, NULL, m_handler, NULL);
 	#endif
 }
 
-// Window::Window(Window const& src) : Window() {}
+Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow)), src.m_winName) {}
 
 Window::~Window() {}
 
