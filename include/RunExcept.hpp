@@ -3,9 +3,9 @@
 
 #include <sstream>
 #include <string>
-#include <exception>
+#include <stdexcept>
 
-class RunExcept : public std::exception
+class RunExcept : public std::runtime_error
 {
 	public:
 		RunExcept(char const* message, char const* file, int line, char const* date, char const* time, char const* function) noexcept;

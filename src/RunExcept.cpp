@@ -1,6 +1,6 @@
 #include "../include/RunExcept.hpp"
 
-RunExcept::RunExcept(char const* message, char const* file, int line, char const* date, char const* time, char const* function) noexcept : std::exception(), m_line(line)
+RunExcept::RunExcept(char const* message, char const* file, int line, char const* date, char const* time, char const* function) noexcept : std::runtime_error(message), m_line(line)
 {
 	std::ostringstream ossFile;
 	std::ostringstream ossDate;

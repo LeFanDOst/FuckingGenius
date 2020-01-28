@@ -24,8 +24,8 @@ THE_MAIN_IS
 	std::cout << myWin.getWindowCount() << std::endl;
 	std::cout << otherWin.getWindowCount() << std::endl;
 	
-	//throw _FGExcept("ERREUR");
-	throw _RunExcept("ERREUR");
+	throw _FGExcept("ERREUR");
+	//throw _RunExcept("ERREUR");
 	
 	return 0;
 }

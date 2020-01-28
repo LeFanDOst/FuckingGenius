@@ -10,7 +10,10 @@ class FGExcept : public RunExcept
 		FGExcept(FGExcept const& src) noexcept;
 		~FGExcept() noexcept;
 		
-		virtual char const* what() const noexcept override;
+		virtual inline char const* what() const noexcept override { return m_message.c_str(); }
+	
+	private:
+		std::string m_message;
 };
 
 #define _FGExcept( message ) FGExcept(message, __FILE__, __LINE__, __DATE__, __TIME__, __func__)
