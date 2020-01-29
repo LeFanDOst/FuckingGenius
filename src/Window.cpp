@@ -1,4 +1,5 @@
 #include "../include/Window.hpp"
+#include <iostream>
 
 uint Window::m_windowCount = 0;
 
@@ -49,6 +50,8 @@ Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winNa
 			//throw _FGExcept("ERROR : Cannot create a new window.");
 		
 		m_mainWindow = CreateWindow(ossCN.str().c_str(), m_winName, FG::TS::DynamicPos, CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, NULL, NULL, m_handler, NULL);
+	#elif defined(LINUX)
+		std::cout << style << " " << hand << " " << win << " " << winName << std::endl;
 	#endif
 }
 

@@ -14,7 +14,7 @@ typedef unsigned int uint;
 	{
 		HINSTANCE window;
 	};*/
-#elif defined(POSIX)
+#elif defined(LINUX)
 	typedef int FGWin;
 	typedef unsigned char FGHandler;
 	typedef char const* FGTitle;

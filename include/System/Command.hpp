@@ -7,7 +7,7 @@
 #if defined (WINDOWS)
 	#define DEL "del" /*!< This macro defines the DOS function to deleting a file. */
 	#define LIST "dir /b /s" /*!< This macro defines the DOS function to list files. */
-#elif defined (POSIX) || defined (MACOS)
+#elif defined (LINUX) || defined (MACOS) // Macro LINUX or POSIX_ENV ? Dunno, have to test it.
 	#define DEL "rm -f" /*!< This macro defines the BASH function to deleting a file. */
 	#define LIST "ls -a" /*!< This macro defines the BASH function to list files. */
 #endif

@@ -1,5 +1,4 @@
 #include "../include/FGExcept.hpp"
-#include <iostream>
 
 FGExcept::FGExcept(char const* message, char const* file, int line, char const* date, char const* time, char const* function) noexcept : RunExcept(message, file, line, date, time, function)
 {
@@ -10,8 +9,6 @@ FGExcept::FGExcept(char const* message, char const* file, int line, char const* 
 			<< "In function : " << this->inFunction() << "\n"
 			<< "At line : " << this->atLine() << "\n"
 			<< "File compiled on '" << this->onDate() << "' at '" << this->atTime() << "'." << "\n";
-	
-	std::cout << ossWhat.str().c_str() << std::endl;
 	
 	m_message = ossWhat.str();
 }
