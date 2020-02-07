@@ -1,35 +1,18 @@
 #ifndef DEF_WINDOW
 #define DEF_WINDOW
 
-#include "TypeStyle.hpp"
+#include "FGTypes/FGTypeStyle.hpp"
+#include "FGTypes/FGBasicTypes.hpp"
 #include "FGExcept.hpp"
 
 typedef unsigned int uint;
-
-#if defined(WINDOWS)
-	typedef HWND FGWin;
-	typedef HINSTANCE FGHandler;
-	typedef LPCTSTR FGTitle;
-	/*struct GuiInfo
-	{
-		HINSTANCE window;
-	};*/
-#elif defined(LINUX)
-	typedef int FGWin;
-	typedef unsigned char FGHandler;
-	typedef char const* FGTitle;
-	/*struct GuiInfo
-	{
-		int window;
-	};*/
-#endif
 
 class Window
 {
 	public:
 		// Third argument, "FGWin& win", is useless as fuck, now
 		// ... I guess
-		Window(int style, FGHandler hand, FGWin& win, FGTitle winName = "");
+		Window(int style, FG::BS::Handler hand, FG::BS::Win& win, FG::BS::Title winName = "");
 		Window(Window const& src);
 		~Window();
 		
@@ -38,15 +21,20 @@ class Window
 		void showThisFuckingWindow();
 	
 	private:
-		FGTitle m_winName;
-		FGHandler& m_handler;
-		FGWin& m_mainWindow;
+		FG::BS::Title m_winName;
+		FG::BS::Handler& m_handler;
+		FG::BS::Win& m_mainWindow;
 		#if defined(WINDOWS)
 			HWND m_window;
 			MSG m_message;
 			WNDCLASS m_winClass;
 		#endif
 		static uint m_windowCount;
+	
+	protected:
+		#if defined(WINDOWS)
+			inline HWND getHandler() const { return m_window; }
+		#endif
 };
 
 #endif // DEF_WINDOW

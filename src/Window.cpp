@@ -22,7 +22,7 @@ uint Window::m_windowCount = 0;
 	}
 #endif
 
-Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winName(winName), m_handler(hand), m_mainWindow(win)
+Window::Window(int style, FG::BS::Handler hand, FG::BS::Win& win, FG::BS::Title winName) : m_winName(winName), m_handler(hand), m_mainWindow(win)
 {
 	++m_windowCount;
 	
@@ -55,11 +55,16 @@ Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winNa
 	#endif
 }
 
-Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow))) {}
+Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FG::BS::Win(src.m_mainWindow))) {}
 
 Window::~Window()
 {
 	--m_windowCount;
+	
+	#if defined(WINDOWS)
+		delete[] m_winName;
+		m_winName = nullptr;
+	#endif
 }
 
 

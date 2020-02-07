@@ -1,7 +1,7 @@
-#ifndef TYPESTYLE_HPP
-#define TYPESTYLE_HPP
+#ifndef FGTYPESTYLE_HPP
+#define FGTYPESTYLE_HPP
 
-#include "System/OS.hpp"
+#include "../System/OS.hpp"
 
 #if defined(WINDOWS)
 	#include <windows.h>
@@ -21,4 +21,4 @@ namespace FG // FuckingGenius
 	} TS; // TypeStyle
 };
 
-#endif // TYPESTYLE_HPP
+#endif // FGTYPESTYLE_HPP
