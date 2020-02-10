@@ -9,21 +9,6 @@ THE_MAIN_IS
 	Window myWin(0, current, thatsTheWindow, "Fuck off, Win32 Fucking API");
 	myWin.showThisFuckingWindow();
 	
-	//std::cout << "1" << std::endl;
-	
-	std::cout << myWin.getWindowCount() << std::endl;
-	
-	Window otherWin(myWin);
-	
-	//std::cout << "2" << std::endl;
-	
-	otherWin.showThisFuckingWindow();
-	
-	//std::cout << "3" << std::endl;
-	
-	std::cout << myWin.getWindowCount() << std::endl;
-	std::cout << otherWin.getWindowCount() << std::endl;
-	
 	myWin.updateWindow();
 	
 	#if defined(WINDOWS)
@@ -36,9 +21,6 @@ THE_MAIN_IS
 	#elif defined(LINUX)
 		
 	#endif
-	
-	//throw _FGExcept("ERREUR");
-	//throw _RunExcept("ERREUR");
 	
 	return 0;
 }
