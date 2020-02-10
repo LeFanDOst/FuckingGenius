@@ -1,5 +1,5 @@
-export Linux=yes
-export Raspbian=yes
+export Linux=no
+export Raspbian=no
 Debug=yes
 LessError=yes
 NoError=yes
