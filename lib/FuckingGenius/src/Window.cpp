@@ -1,9 +1,23 @@
 #include "../include/Window.hpp"
 #include <iostream>
 
-#define None NULL
+FGHandler getAnHandler()
+{
+	#if defined(WINDOWS)
+		return GetModuleHandle(NULL);
+	#elif defined(LINUX)
+		return 'a';
+	#endif
+}
 
-uint Window::m_windowCount = 0;
+FGWin returnAWin()
+{
+	#if defined(WINDOWS)
+		return None;
+	#elif defined(LINUX)
+		return 0;
+	#endif
+}
 
 #if defined(WINDOWS)
 	LRESULT CALLBACK WinConstructCB(HWND win, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -44,9 +58,13 @@ uint Window::m_windowCount = 0;
 	}
 #endif
 
-Window::Window(int style, FGTitle winName) : m_winName(winName), m_handler(GetModuleHandle(NULL)), m_mainWindow(None)
+uint FGWindow::m_windowCount = 0;
+
+FGWindow::FGWindow(int style, FGTitle winName) : m_winName(winName), m_handler(getAnHandler()), m_mainWindow(returnAWin()), m_style(style)
 {
 	++m_windowCount;
+	
+	style = style;
 	
 	#if defined(WINDOWS)
 		std::string className;
@@ -74,26 +92,35 @@ Window::Window(int style, FGTitle winName) : m_winName(winName), m_handler(GetMo
 			//throw _FGExcept("ERROR : Cannot create a new window.");
 		
 		m_mainWindow = CreateWindow(ossCN.str().c_str(), m_winName, FG::TS::DynamicPos, CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, NULL, NULL, m_handler, NULL);
+	#elif defined(LINUX)
+		m_displayer = XOpenDisplay(NULL);
+		
+		if(m_displayer == NULL)
+			throw _FGExcept("Holy shit");
+		
+		m_screen = DefaultScreen(m_displayer);
+		
+		m_mainWindow = XCreateSimpleWindow(m_displayer, RootWindow(m_displayer, m_screen), 10, 10, 100, 100, 1, BlackPixel(m_displayer, m_screen), WhitePixel(m_displayer, m_screen));
 	#endif
 }
 
-//Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow))) {}
-Window::Window(Window const& src) : Window(src.m_winClass.style) {}
+//FGWindow::FGWindow(FGWindow const& src) : FGWindow(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow))) {}
+FGWindow::FGWindow(FGWindow const& src) : FGWindow(src.m_style) {}
 
-Window::~Window()
+FGWindow::~FGWindow()
 {
 	--m_windowCount;
 }
 
 
-void Window::showThisFuckingWindow()
+void FGWindow::showThisFuckingWindow()
 {
 	#if defined(WINDOWS)
 		ShowWindow(m_mainWindow, SW_SHOW);
 	#endif
 }
 
-void Window::updateWindow()
+void FGWindow::updateWindow()
 {
 	#if defined(WINDOWS)
 		UpdateWindow(m_mainWindow);

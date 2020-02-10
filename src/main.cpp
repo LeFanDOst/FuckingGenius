@@ -6,7 +6,7 @@
 int main()
 {
 	//KAY_SHUT_UP_WARNS
-	Window myWin(0, "Fuck off, Win32 Fucking API");
+	FGWindow myWin(0, "Fuck off, Win32 Fucking API");
 	myWin.showThisFuckingWindow();
 	
 	myWin.updateWindow();

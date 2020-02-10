@@ -8,7 +8,7 @@
 	#define EVENT_EXPRESS std::cout << handle << " " << wMsgFilterMin << " " << wMsgFilterMax << std::endl; \
 						  TranslateMessage(&evtMsg); \
 						  DispatchMessage(&evtMsg);
-#elif defined(POSIX)
+#elif defined(LINUX)
 	#define EVENT_EXPRESS std::cout << evtMsg << " " << handle << " " << wMsgFilterMin << " " << wMsgFilterMax << std::endl;
 #endif
 

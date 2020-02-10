@@ -45,7 +45,7 @@
 	#ifndef UNIX_ENVIRONMENT
 		#define UNIX_ENVIRONMENT /*!< This macro is defined by compiler if the OS is a Unix environment. */
 	#endif
-#elif defined(__linux__) || defined(linux) || defined(__linux) // WARNING : the macros "linux" and "__linux" are obsolete because not POSIX compliant.
+#elif defined(__arm__)// || defined(__linux__) || defined(linux) || defined(__linux) // WARNING : the macros "linux" and "__linux" are obsolete because not POSIX compliant.
 	#ifndef LINUX
 		#define LINUX /*!< This macro is defined by compiler if the OS is based on a Linux kernel. */
 	#endif

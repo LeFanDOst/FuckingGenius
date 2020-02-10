@@ -27,7 +27,7 @@
 	typedef UINT FGUint;
 	typedef LONG FGLong;
 	#define FG_NULL_HANDLE NULL
-#elif defined(POSIX)
+#elif defined(LINUX) || defined(__arm__)
 	typedef bool FGBool;
 	typedef char const* FGEventMessage;
 	typedef unsigned int FGUint;

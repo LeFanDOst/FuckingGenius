@@ -1,4 +1,5 @@
-export Linux=no
+export Linux=yes
+export Raspbian=yes
 Debug=yes
 LessError=yes
 NoError=yes
@@ -30,7 +31,17 @@ else
 	OptFlags=
 endif
 
-FlagsThatIWish=$(DebugFlag) $(LessErrFlag) $(NoErrFlags) $(OptFlags)
+ifeq ($(Linux),yes)
+	ifeq ($(Raspbian),yes)
+		Defining=-DLINUX
+	else
+		Defining=
+	endif
+else
+	Defining=
+endif
+
+FlagsThatIWish=$(DebugFlag)  $(Defining) $(LessErrFlag) $(NoErrFlags) $(OptFlags)
 
 LibraryName=FuckingGenius
 
@@ -49,7 +60,7 @@ LinkFlags=$(PreprocFlags) -L$(DirLib)/$(LibraryName)/lib -l$(LibraryName)
 
 ifeq ($(Linux),yes)
 	PreprocSysFlags=
-	LinkSysFlags=$(PreprocSysFlags)
+	LinkSysFlags=$(PreprocSysFlags) -lX11
 	RM=rm -f
 	cmdClean=$(RM) $(DirObj)/*.o
 	Extension=

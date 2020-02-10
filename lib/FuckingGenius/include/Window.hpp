@@ -5,6 +5,12 @@
 #include "Types/KeyTypes.hpp"
 #include "FGExcept.hpp"
 
+#if defined(LINUX)
+	#include <X11/Xlib.h>
+#endif
+
+//#define None NULL
+
 typedef unsigned int uint;
 
 #if defined(WINDOWS)
@@ -15,8 +21,8 @@ typedef unsigned int uint;
 	{
 		HINSTANCE window;
 	};*/
-#elif defined(POSIX)
-	typedef int FGWin;
+#elif defined(LINUX)
+	typedef Window FGWin;
 	typedef unsigned char FGHandler;
 	typedef char const* FGTitle;
 	/*struct GuiInfo
@@ -25,14 +31,14 @@ typedef unsigned int uint;
 	};*/
 #endif
 
-class Window
+class FGWindow
 {
 	public:
 		// Third argument, "FGWin& win", is useless as fuck, now
 		// ... I guess
-		Window(int style, FGTitle winName = "");
-		Window(Window const& src);
-		~Window();
+		FGWindow(int style, FGTitle winName = "");
+		FGWindow(FGWindow const& src);
+		~FGWindow();
 		
 		inline uint getWindowCount() const { return m_windowCount; }
 		
@@ -49,10 +55,14 @@ class Window
 		FGTitle m_winName;
 		FGHandler/*&*/ m_handler;
 		FGWin/*&*/ m_mainWindow;
+		int m_style;
 		#if defined(WINDOWS)
 			HWND m_window;
 			MSG m_message;
 			WNDCLASS m_winClass;
+		#elif defined(LINUX)
+			Display*  m_displayer;
+			int m_screen;
 		#endif
 		static uint m_windowCount;
 };

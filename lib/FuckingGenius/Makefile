@@ -30,7 +30,17 @@ else
 	OptFlags=
 endif
 
-FlagsThatIWish=$(DebugFlag) $(LessErrFlag) $(NoErrFlags) $(OptFlags)
+ifeq ($(Linux),yes)
+	ifeq ($(Raspbian),yes)
+		Defining=-DLINUX
+	else
+		Defining=
+	endif
+else
+	Defining=
+endif
+
+FlagsThatIWish=$(DebugFlag) $(Defining) $(LessErrFlag) $(NoErrFlags) $(OptFlags)
 
 LibraryName=FuckingGenius
 

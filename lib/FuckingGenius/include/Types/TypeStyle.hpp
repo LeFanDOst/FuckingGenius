@@ -14,7 +14,7 @@ namespace FG // FuckingGenius
 		#if defined(WINDOWS)
 			DynamicPos = WS_OVERLAPPEDWINDOW,
 			VisibleStyle = WS_VISIBLE
-		#elif defined(POSIX)
+		#elif defined(LINUX)
 			DynamicPos = 0,
 			VisibleStyle = 1
 		#endif
