@@ -4,11 +4,11 @@ FGExcept::FGExcept(char const* message, char const* file, int line, char const* 
 {
 	std::ostringstream ossWhat;
 	
-	ossWhat << RunExcept::what() << std::endl
-			<< "In file : " << this->inFile() << std::endl
-			<< "In function : " << this->inFunction() << std::endl
-			<< "At line : " << this->atLine() << std::endl
-			<< "File compiled on '" << this->onDate() << "' at '" << this->atTime() << "'." << std::endl;
+	ossWhat << RunExcept::what() << "\n"
+			<< "In file : " << this->inFile() << "\n"
+			<< "In function : " << this->inFunction() << "\n"
+			<< "At line : " << this->atLine() << "\n"
+			<< "File compiled on '" << this->onDate() << "' at '" << this->atTime() << "'." << "\n";
 	
 	m_message = ossWhat.str();
 }
