@@ -2,7 +2,7 @@
 #define INCLUDES_HPP
 
 #include <iostream>
-#include "Events.hpp"
+#include "../lib/FuckingGenius/FuckingGenius.hpp"
 
 #if defined(WINDOWS)
 	#include <windows.h>

@@ -1,4 +1,4 @@
-export Linux=no
+# Linux=no
 Debug=yes
 LessError=yes
 NoError=yes
@@ -38,62 +38,48 @@ DirSrc=src
 DirObj=obj
 DirLib=lib
 
-MainSourceFile=main
-HeaderNeeded=include/Includes.hpp
-
 Compiler=g++
+LibCompiler=ar
 Link=-o
+LibLink=-rv
 Preproc=-c $(FlagsThatIWish) -fexceptions -std=c++$(CppVersion)
 PreprocFlags=
-LinkFlags=$(PreprocFlags) -L$(DirLib)/$(LibraryName)/lib -l$(LibraryName)
+# LinkFlags=$(PreprocFlags)
 
 ifeq ($(Linux),yes)
 	PreprocSysFlags=
-	LinkSysFlags=$(PreprocSysFlags)
+	# LinkSysFlags=$(PreprocSysFlags)
 	RM=rm -f
 	cmdClean=$(RM) $(DirObj)/*.o
-	Extension=
 else
 	PreprocSysFlags=
-	LinkSysFlags=$(PreprocSysFlags) -lgdi32 -luser32 -lkernel32 -lcomctl32
+	# LinkSysFlags=$(PreprocSysFlags) -lgdi32 -luser32 -lkernel32 -lcomctl32
 	RM=del
 	cmdClean=$(RM) $(DirObj)\*.o
-	Extension=.exe
 endif
 
 Src=$(wildcard $(DirSrc)/*.cpp)
 Obj=$(patsubst $(DirSrc)/%.cpp,$(DirObj)/%.o,$(Src))
-Exec=$(MainSourceFile)$(Extension)
+Exec=lib$(LibraryName).a
 
 ifeq ($(Linux),yes)
-	ExecPerm=chmod u+x $(Exec) ./$(Exec)
-	cmdRun=./$(Exec)
+	cmdMrProper=$(RM) $(DirLib)/$(Exec)
 else
-	ExecPerm=
-	cmdRun=$(Exec)
+	cmdMrProper=$(RM) $(DirLib)\$(Exec)
 endif
 
-all: $(Exec)
+all: $(DirLib)/$(Exec)
 
-$(Exec): $(Obj)
-	@(cd $(DirLib)/$(LibraryName) && $(MAKE))
-	$(Compiler) $(Link) $@ $^ $(LinkFlags) $(LinkSysFlags)
-
-$(DirObj)/$(MainSourceFile).o: $(HeaderNeeded)
+$(DirLib)/$(Exec): $(Obj)
+	$(LibCompiler) $(LibLink) $@ $^
 
 $(DirObj)/%.o: $(DirSrc)/%.cpp
 	$(Compiler) $(Link) $@ $< $(Preproc) $(PreprocFlags) $(PreprocSysFlags)
 
-.PONY: clean mrproper run
+.PONY: clean mrproper
 
 clean:
-	@(cd $(DirLib)/$(LibraryName) && $(MAKE) $@)
 	$(cmdClean)
 
 mrproper:
-	@(cd $(DirLib)/$(LibraryName) && $(MAKE) $@)
-	$(RM) $(Exec)
-
-run:
-	$(ExecPerm)
-	$(cmdRun)
+	$(cmdMrProper)
