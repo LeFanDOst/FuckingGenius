@@ -2,6 +2,7 @@
 #define DEF_WINDOW
 
 #include "Types/TypeStyle.hpp"
+#include "Types/KeyTypes.hpp"
 #include "FGExcept.hpp"
 
 typedef unsigned int uint;
@@ -29,7 +30,7 @@ class Window
 	public:
 		// Third argument, "FGWin& win", is useless as fuck, now
 		// ... I guess
-		Window(int style, FGHandler hand, FGWin& win, FGTitle winName = "");
+		Window(int style, FGTitle winName = "");
 		Window(Window const& src);
 		~Window();
 		
@@ -46,8 +47,8 @@ class Window
 	
 	private:
 		FGTitle m_winName;
-		FGHandler& m_handler;
-		FGWin& m_mainWindow;
+		FGHandler/*&*/ m_handler;
+		FGWin/*&*/ m_mainWindow;
 		#if defined(WINDOWS)
 			HWND m_window;
 			MSG m_message;

@@ -1,4 +1,7 @@
 #include "../include/Window.hpp"
+#include <iostream>
+
+#define None NULL
 
 uint Window::m_windowCount = 0;
 
@@ -14,6 +17,26 @@ uint Window::m_windowCount = 0;
 				PostQuitMessage(0);
 				return 0;
 			break;
+			case WM_CHAR:
+			{
+				switch(wParam)
+				{
+					case FG::KT::A :
+						std::cout << keyToInt(FG::KT::A) << std::endl;
+					break;
+					case FG::KT::a :
+						std::cout << keyToInt(FG::KT::a) << std::endl;
+					break;
+					default:
+					break;
+				}
+			}
+			return 0;
+			break;
+			case FG::KT::A:
+				std::cout << keyToInt(FG::KT::A) << std::endl;
+				return 0;
+			break;
 			default:
 				return DefWindowProc(win, msg, wParam, lParam);
 			break;
@@ -21,7 +44,7 @@ uint Window::m_windowCount = 0;
 	}
 #endif
 
-Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winName(winName), m_handler(hand), m_mainWindow(win)
+Window::Window(int style, FGTitle winName) : m_winName(winName), m_handler(GetModuleHandle(NULL)), m_mainWindow(None)
 {
 	++m_windowCount;
 	
@@ -29,9 +52,11 @@ Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winNa
 		std::string className;
 		std::ostringstream ossCN;
 		
+		//m_handler = GetModuleHandle(NULL);
+		
 		ossCN << "Window" << m_windowCount;
 		
-		m_mainWindow = win;
+		//m_mainWindow = None;
 		
 		m_winClass.style = style;
 		m_winClass.lpfnWndProc = WinConstructCB;
@@ -52,7 +77,8 @@ Window::Window(int style, FGHandler hand, FGWin& win, FGTitle winName) : m_winNa
 	#endif
 }
 
-Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow))) {}
+//Window::Window(Window const& src) : Window(src.m_winClass.style, src.m_handler, *(new FGWin(src.m_mainWindow))) {}
+Window::Window(Window const& src) : Window(src.m_winClass.style) {}
 
 Window::~Window()
 {

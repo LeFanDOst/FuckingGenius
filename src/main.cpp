@@ -2,11 +2,11 @@
 #include "../include/Includes.hpp"
 
 //int main()
-THE_MAIN_IS
+//THE_MAIN_IS
+int main()
 {
-	KAY_SHUT_UP_WARNS
-	FGWin thatsTheWindow;
-	Window myWin(0, current, thatsTheWindow, "Fuck off, Win32 Fucking API");
+	//KAY_SHUT_UP_WARNS
+	Window myWin(0, "Fuck off, Win32 Fucking API");
 	myWin.showThisFuckingWindow();
 	
 	myWin.updateWindow();
