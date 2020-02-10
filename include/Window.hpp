@@ -1,7 +1,7 @@
 #ifndef DEF_WINDOW
 #define DEF_WINDOW
 
-#include "TypeStyle.hpp"
+#include "Types/TypeStyle.hpp"
 #include "FGExcept.hpp"
 
 typedef unsigned int uint;
@@ -35,7 +35,14 @@ class Window
 		
 		inline uint getWindowCount() const { return m_windowCount; }
 		
+		#if defined(WINDOWS)
+			inline MSG getMessage() const { return m_message; }
+		#elif defined(LINUX)
+			inline bool getMessage() const { return true; }
+		#endif
+		
 		void showThisFuckingWindow();
+		void updateWindow();
 	
 	private:
 		FGTitle m_winName;

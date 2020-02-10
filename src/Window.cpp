@@ -66,3 +66,10 @@ void Window::showThisFuckingWindow()
 		ShowWindow(m_mainWindow, SW_SHOW);
 	#endif
 }
+
+void Window::updateWindow()
+{
+	#if defined(WINDOWS)
+		UpdateWindow(m_mainWindow);
+	#endif
+}

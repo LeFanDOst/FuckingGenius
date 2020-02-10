@@ -1,7 +1,7 @@
 #ifndef TYPESTYLE_HPP
 #define TYPESTYLE_HPP
 
-#include "System/OS.hpp"
+#include "../System/OS.hpp"
 
 #if defined(WINDOWS)
 	#include <windows.h>

@@ -2,7 +2,7 @@
 #define INCLUDES_HPP
 
 #include <iostream>
-#include "Window.hpp"
+#include "Events.hpp"
 
 #if defined(WINDOWS)
 	#include <windows.h>

@@ -9,23 +9,36 @@ THE_MAIN_IS
 	Window myWin(0, current, thatsTheWindow, "Fuck off, Win32 Fucking API");
 	myWin.showThisFuckingWindow();
 	
-	std::cout << "1" << std::endl;
+	//std::cout << "1" << std::endl;
 	
 	std::cout << myWin.getWindowCount() << std::endl;
 	
 	Window otherWin(myWin);
 	
-	std::cout << "2" << std::endl;
+	//std::cout << "2" << std::endl;
 	
 	otherWin.showThisFuckingWindow();
 	
-	std::cout << "3" << std::endl;
+	//std::cout << "3" << std::endl;
 	
 	std::cout << myWin.getWindowCount() << std::endl;
 	std::cout << otherWin.getWindowCount() << std::endl;
 	
+	myWin.updateWindow();
+	
+	#if defined(WINDOWS)
+		MSG msg = myWin.getMessage();
+		while(GetMessage(&msg, NULL, 0, 0))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	#elif defined(LINUX)
+		
+	#endif
+	
 	//throw _FGExcept("ERREUR");
-	throw _RunExcept("ERREUR");
+	//throw _RunExcept("ERREUR");
 	
 	return 0;
 }
