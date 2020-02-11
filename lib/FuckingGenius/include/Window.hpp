@@ -9,7 +9,7 @@
 	#include <X11/Xlib.h>
 #endif
 
-//#define None NULL
+#define None NULL
 
 typedef unsigned int uint;
 

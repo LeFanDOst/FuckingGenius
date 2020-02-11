@@ -19,7 +19,7 @@ class Text
 		inline void setPlacement(RectDescription rp) { m_rectPlacement = rp; }
 		inline void setString(std::string str) { m_string = str; }
 		
-		virtual void draw(Window& win) const;
+		virtual void draw(FGWindow& win) const;
 		inline std::string toString() const { return m_string; }
 	
 	private:
