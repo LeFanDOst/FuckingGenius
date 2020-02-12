@@ -3,5 +3,6 @@
 
 #include "include/Events.hpp"
 #include "include/Types.hpp"
+#include "include/Text.hpp"
 
 #endif // FUCKINGGENIUS_HPP

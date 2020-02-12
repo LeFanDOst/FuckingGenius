@@ -1,6 +1,15 @@
 #include "../include/Window.hpp"
 #include <iostream>
 
+#if defined(WINDOWS)
+	#ifndef PAINT_EVENT
+		#define PAINT_EVENT WM_PAINT
+	#endif
+#endif
+
+//Text txt;
+std::string message = "";
+
 FGHandler getAnHandler()
 {
 	#if defined(WINDOWS)
@@ -20,6 +29,17 @@ FGWin returnAWin()
 }
 
 #if defined(WINDOWS)
+	void UpdateGraph(HWND hwnd, HDC dc)
+	{
+		RECT rc;
+		GetClientRect(hwnd, &rc);
+		//DrawText(dc, "Hello !", -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+		std::cout << "message = " << message << std::endl;
+		DrawText(dc, message.c_str(), -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+	}
+	
+	
+	
 	LRESULT CALLBACK WinConstructCB(HWND win, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		switch(msg)
@@ -31,6 +51,25 @@ FGWin returnAWin()
 				PostQuitMessage(0);
 				return 0;
 			break;
+			case WM_PAINT:
+			{
+				RECT rToPaint;
+				if(!GetUpdateRect(win, &rToPaint, FALSE))
+				{
+					return 0;
+					break;
+				}
+				
+				PAINTSTRUCT ps;
+				BeginPaint(win, &ps);
+				
+				UpdateGraph(win, ps.hdc);
+				
+				EndPaint(win, &ps);
+				
+				return 0;
+			}
+			break;
 			case WM_CHAR:
 			{
 				switch(wParam)
@@ -40,6 +79,10 @@ FGWin returnAWin()
 					break;
 					case FG::KT::a :
 						std::cout << keyToInt(FG::KT::a) << std::endl;
+					break;
+					case FG::KT::Asterisk :
+						PostMessage(win, PAINT_EVENT, 0, 0);
+						std::cout << "Asterisk message = " << message << std::endl;
 					break;
 					default:
 					break;
@@ -124,5 +167,48 @@ void FGWindow::updateWindow()
 {
 	#if defined(WINDOWS)
 		UpdateWindow(m_mainWindow);
+	#endif
+}
+
+void FGWindow::drawText(std::string mig)
+{
+	#if defined(WINDOWS)
+		/*if(mig == "")
+			mig = mig;*/
+		
+		message = mig;
+		/*// Previous declarations.
+		LOGFONT fontStruct;
+		PAINTSTRUCT ps;
+		HFONT font;
+		HDC dc;
+		
+		// LOGFONT filling.
+		ZeroMemory(&fontStruct, sizeof(LOGFONT));
+		strcpy(fontStruct.lfFaceName, "Arial");
+		fontStruct.lfHeight = 32;
+		//fontStruct.lfWidth = 400;
+		fontStruct.lfUnderline = FG_TRUE;
+		
+		// Font creation.
+		font = CreateFontIndirect(&fontStruct);
+		
+		// Drawing surface recuperation.
+		dc = BeginPaint(m_mainWindow, &ps);
+		
+		// Having a transparent background.
+		SetBkMode(dc, TRANSPARENT);
+		// Apply font to dc text.
+		SelectObject(dc, font);
+		// Apply text color to dc
+		SetTextColor(dc, RGB(255, 0, 0));
+		
+		// Text displaying.
+		TextOut(dc, 10, 400, text.c_str(), text.length());
+		
+		// Surface and dc liberation.
+		EndPaint(m_mainWindow, &ps);*/
+		
+		
 	#endif
 }

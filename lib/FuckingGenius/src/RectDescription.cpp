@@ -18,6 +18,19 @@ RectDescription& RectDescription::operator=(RectDescription const& src)
 }
 
 
+RectDescription RectDescription::haveWindowRect(FGWindow win)
+{
+	#if defined(WINDOWS)
+		RECT rectRes;
+		GetClientRect(win.getWinPainting(), &rectRes);
+		
+		return RectDescription(rectRes.left, rectRes.top, rectRes.right, rectRes.bottom);
+	#elif defined(LINUX)
+		return RectDescription(0, 0, 0, 0);
+	#endif
+}
+
+
 bool operator==(RectDescription const& rd1, RectDescription const& rd2)
 {
 	RectDescription copy(rd1);

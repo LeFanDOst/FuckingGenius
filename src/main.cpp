@@ -11,12 +11,24 @@ int main()
 	
 	myWin.updateWindow();
 	
+	Text myBeautifulText("Hello, world !");
+	
+	myBeautifulText.setPlacement(RectDescription(0, 0, 300, 400));
+	myBeautifulText.setUnderlining(true);
+	myBeautifulText.setFont("Arial");
+	myBeautifulText.setColor(RGB(255, 0, 0));
+	
+	myBeautifulText.draw(myWin);
+	myWin.drawText("Hello, world !");
+	
 	#if defined(WINDOWS)
 		MSG msg = myWin.getMessage();
 		while(GetMessage(&msg, NULL, 0, 0))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+			
+			msg = myWin.getMessage();
 		}
 	#elif defined(LINUX)
 		
