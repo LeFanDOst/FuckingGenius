@@ -25,7 +25,7 @@ void Text::draw(FGWindow& win) const
 void Text::paintToWindow(FGWindow& win) const
 {
 	#if defined(WINDOWS)
-		// Previous declarations.
+		/*// Previous declarations.
 		LOGFONT fontStruct;
 		PAINTSTRUCT ps;
 		HFONT font;
@@ -55,6 +55,32 @@ void Text::paintToWindow(FGWindow& win) const
 		TextOut(dc, m_rectPlacement.getLeft(), m_rectPlacement.getTop(), m_string.c_str(), m_string.length());
 		
 		// Surface and dc liberation.
+		EndPaint(win.getWinPainting(), &ps);*/
+		
+		HDC hdc;
+		PAINTSTRUCT ps;
+		LOGFONT fontStruct;
+		HFONT font;
+		
+		hdc = GetWindowDC(win.getWinPainting());
+		
+		ZeroMemory(&fontStruct, sizeof(LOGFONT));
+		strcpy(fontStruct.lfFaceName, m_font.c_str());
+		fontStruct.lfHeight = (m_rectPlacement.getTop() - m_rectPlacement.getBottom());
+		fontStruct.lfWidth = 400;
+		fontStruct.lfUnderline = m_underlining;
+		
+		font = CreateFontIndirect(&fontStruct);
+		
+		hdc = BeginPaint(win.getWinPainting(), &ps);
+		
+		SetBkMode(hdc, TRANSPARENT);
+		SelectObject(hdc, font);
+		SetTextColor(hdc, m_color);
+		
+		//TextOut(hdc, 10, 10, m_string.c_str(), strlen(m_string.c_str()));
+		TextOut(hdc, m_rectPlacement.getLeft(), m_rectPlacement.getTop(), m_string.c_str(), m_string.length());
+		
 		EndPaint(win.getWinPainting(), &ps);
 	#endif
 }

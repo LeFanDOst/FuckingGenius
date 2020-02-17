@@ -3,7 +3,7 @@
 
 /*! \page page1 OS macros
  * \par Use of these macros :
- * 		These macros are used to detect the Operating System used by the platforrm where the code is compiled. It permit to use the conditional compilation.
+ * 		These macros are used to detect the Operating System used by the platform where the code is compiled. It permit to use the conditional compilation.
  * \par List of the differents macros :
  * 		A table of the defined macros will be give later. But the macros defines these OS :
  * 		- Unix Environment

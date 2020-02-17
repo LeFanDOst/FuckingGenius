@@ -37,6 +37,7 @@ class FGWindow
 		void showThisFuckingWindow();
 		void updateWindow();
 		void drawText(std::string mig);
+		void redraw();
 	
 	private:
 		FGTitle m_winName;

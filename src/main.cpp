@@ -19,7 +19,9 @@ int main()
 	myBeautifulText.setColor(RGB(255, 0, 0));
 	
 	myBeautifulText.draw(myWin);
-	myWin.drawText("Hello, world !");
+	//myWin.drawText("Hello, world !");
+	
+	myWin.redraw();
 	
 	#if defined(WINDOWS)
 		MSG msg = myWin.getMessage();

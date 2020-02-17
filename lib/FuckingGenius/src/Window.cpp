@@ -29,14 +29,14 @@ FGWin returnAWin()
 }
 
 #if defined(WINDOWS)
-	void UpdateGraph(HWND hwnd, HDC dc)
+	/*void UpdateGraph(HWND hwnd, HDC dc)
 	{
 		RECT rc;
 		GetClientRect(hwnd, &rc);
 		//DrawText(dc, "Hello !", -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		std::cout << "message = " << message << std::endl;
 		DrawText(dc, message.c_str(), -1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-	}
+	}*/
 	
 	
 	
@@ -53,7 +53,7 @@ FGWin returnAWin()
 			break;
 			case WM_PAINT:
 			{
-				RECT rToPaint;
+				/*RECT rToPaint;
 				if(!GetUpdateRect(win, &rToPaint, FALSE))
 				{
 					return 0;
@@ -66,6 +66,23 @@ FGWin returnAWin()
 				UpdateGraph(win, ps.hdc);
 				
 				EndPaint(win, &ps);
+				
+				return 0;*/
+				
+				
+				
+				/*HDC hdc;
+				hdc = GetWindowDC(win);
+				
+				PAINTSTRUCT ps;
+				
+				hdc = BeginPaint(win, &ps);
+				
+				TextOut(hdc, 10, 10, "Voici notre phrase", strlen("Voici notre phrase"));
+				
+				EndPaint(win, &ps);
+				
+				return 0;*/
 				
 				return 0;
 			}
@@ -167,6 +184,14 @@ void FGWindow::updateWindow()
 {
 	#if defined(WINDOWS)
 		UpdateWindow(m_mainWindow);
+	#endif
+}
+
+void FGWindow::redraw()
+{
+	#if defined(WINDOWS)
+		InvalidateRect(m_mainWindow, 0, FALSE);
+		InvalidateRect(m_window, 0, FALSE);
 	#endif
 }
 
