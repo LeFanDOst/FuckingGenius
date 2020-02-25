@@ -2,6 +2,7 @@
 #define DEF_RECTDESCRIPTION
 
 #include "Types/BasicTypes.hpp"
+#include "Window.hpp"
 
 class RectDescription
 {
@@ -24,6 +25,8 @@ class RectDescription
 		
 		inline bool isEqual(RectDescription const& src) const { return ((m_left == src.m_left) && (m_top == src.m_top) && (m_right == src.m_right) && (m_bottom == src.m_bottom)); }
 		inline bool isDifferent(RectDescription const& src) const { return (!this->isEqual(src)); }
+		
+		static RectDescription haveWindowRect(FGWindow win);
 	
 	private:
 		FGLong m_left;

@@ -1,8 +1,11 @@
 #ifndef DEF_WINDOW
 #define DEF_WINDOW
 
+#include "Types/WindowTypes.hpp"
 #include "Types/TypeStyle.hpp"
 #include "Types/KeyTypes.hpp"
+#include "Types/TextTypes.hpp"
+#include "Values/BasicValues.hpp"
 #include "FGExcept.hpp"
 
 #if defined(LINUX)
@@ -12,24 +15,6 @@
 #define None NULL
 
 typedef unsigned int uint;
-
-#if defined(WINDOWS)
-	typedef HWND FGWin;
-	typedef HINSTANCE FGHandler;
-	typedef LPCTSTR FGTitle;
-	/*struct GuiInfo
-	{
-		HINSTANCE window;
-	};*/
-#elif defined(LINUX)
-	typedef Window FGWin;
-	typedef unsigned char FGHandler;
-	typedef char const* FGTitle;
-	/*struct GuiInfo
-	{
-		int window;
-	};*/
-#endif
 
 class FGWindow
 {
@@ -41,6 +26,7 @@ class FGWindow
 		~FGWindow();
 		
 		inline uint getWindowCount() const { return m_windowCount; }
+		inline FGWin getWinPainting() const { return m_mainWindow; }
 		
 		#if defined(WINDOWS)
 			inline MSG getMessage() const { return m_message; }
@@ -50,6 +36,8 @@ class FGWindow
 		
 		void showThisFuckingWindow();
 		void updateWindow();
+		void drawText(std::string mig);
+		void redraw();
 	
 	private:
 		FGTitle m_winName;
