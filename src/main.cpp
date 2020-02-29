@@ -11,8 +11,9 @@ int main()
 	
 	myWin.updateWindow();
 	
+#if defined(WINDOWS)
 	Text myBeautifulText("Hello, world !");
-	
+
 	myBeautifulText.setPlacement(RectDescription(0, 0, 300, 400));
 	myBeautifulText.setUnderlining(true);
 	myBeautifulText.setFont("Arial");
@@ -20,8 +21,9 @@ int main()
 	
 	myBeautifulText.draw(myWin);
 	//myWin.drawText("Hello, world !");
-	
+
 	myWin.redraw();
+#endif	
 	
 	#if defined(WINDOWS)
 		MSG msg = myWin.getMessage();
