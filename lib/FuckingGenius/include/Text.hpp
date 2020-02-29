@@ -2,6 +2,7 @@
 #define DEF_TEXT
 
 //#include "Window.hpp"
+#include "Types/BasicTypes.hpp"
 #include "RectDescription.hpp"
 #include <sstream>
 #include <string>
@@ -15,18 +16,26 @@ class Text
 		virtual ~Text();
 		
 		inline std::string getString() const { return m_string; }
+		inline size_t getX() const { return m_x; }
+		inline size_t getY() const { return m_y; }
+		inline size_t getHeight() const { return m_height; }
+		inline size_t getWidth() const { return m_width; }
 		
 		#if defined(WINDOWS)
-			inline RectDescription getPlacement() const { return m_rectPlacement; }
+			//inline RectDescription getPlacement() const { return m_rectPlacement; }
 			inline FGBool getUnderlining() const { return m_underlining; }
 			inline std::string getFont() const { return m_font; }
 			inline FGColorType getColor() const { return m_color; }
 		#endif
 		
 		inline void setString(std::string str) { m_string = str; }
+		inline void setX(size_t x) { m_x = x; }
+		inline void setY(size_t y) { m_y = y; }
+		inline void setHeight(size_t height) { m_height = height; }
+		inline void setWidth(size_t width) { m_width = width; }
 		
 		#if defined(WINDOWS)
-			inline void setPlacement(RectDescription rp) { m_rectPlacement = rp; }
+			//inline void setPlacement(RectDescription rp) { m_rectPlacement = rp; }
 			inline void setUnderlining(FGBool underlining) { m_underlining = underlining; }
 			inline void setFont(std::string font) { m_font = font; }
 			inline void setColor(FGColorType color) { m_color = color; }
@@ -37,9 +46,13 @@ class Text
 	
 	private:
 		std::string m_string;
+		size_t m_x;
+		size_t m_y;
+		size_t m_height;
+		size_t m_width;
 		
 		#if defined(WINDOWS)
-			RectDescription m_rectPlacement;
+			//RectDescription m_rectPlacement;
 			FGBool m_underlining;
 			std::string m_font;
 			FGColorType m_color;

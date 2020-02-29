@@ -63,11 +63,13 @@ void Text::paintToWindow(FGWindow& win) const
 		HFONT font;
 		
 		hdc = GetWindowDC(win.getWinPainting());
-		
+		//FGLong
 		ZeroMemory(&fontStruct, sizeof(LOGFONT));
 		strcpy(fontStruct.lfFaceName, m_font.c_str());
-		fontStruct.lfHeight = (m_rectPlacement.getTop() - m_rectPlacement.getBottom());
-		fontStruct.lfWidth = 400;
+		//fontStruct.lfHeight = (m_rectPlacement.getTop() - m_rectPlacement.getBottom());
+		fontStruct.lfHeight = static_cast<FGLong>(m_height);
+		//fontStruct.lfWidth = 400;
+		fontStruct.lfWidth = static_cast<FGLong>(m_width);
 		fontStruct.lfUnderline = m_underlining;
 		
 		font = CreateFontIndirect(&fontStruct);
@@ -79,7 +81,8 @@ void Text::paintToWindow(FGWindow& win) const
 		SetTextColor(hdc, m_color);
 		
 		//TextOut(hdc, 10, 10, m_string.c_str(), strlen(m_string.c_str()));
-		TextOut(hdc, m_rectPlacement.getLeft(), m_rectPlacement.getTop(), m_string.c_str(), m_string.length());
+		//TextOut(hdc, m_rectPlacement.getLeft(), m_rectPlacement.getTop(), m_string.c_str(), m_string.length());
+		TextOut(hdc, static_cast<int>(m_x), static_cast<int>(m_y), m_string.c_str(), m_string.length());
 		
 		EndPaint(win.getWinPainting(), &ps);
 	#endif
