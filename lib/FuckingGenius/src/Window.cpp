@@ -28,6 +28,15 @@ FGWin returnAWin()
 	#endif
 }
 
+
+#if defined(LINUX)
+    Display* FGWindow::getWindowDisplayer()
+    {
+        return m_displayer;
+    }
+#endif
+
+
 #if defined(WINDOWS)
 	/*void UpdateGraph(HWND hwnd, HDC dc)
 	{
@@ -234,6 +243,8 @@ void FGWindow::drawText(std::string mig)
 		// Surface and dc liberation.
 		EndPaint(m_mainWindow, &ps);*/
 		
-		
+    #elif defined(LINUX)
+        if(mig.empty())
+            throw _FGExcept("Holy shit");
 	#endif
 }

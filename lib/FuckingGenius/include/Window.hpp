@@ -12,7 +12,9 @@
 	#include <X11/Xlib.h>
 #endif
 
-#define None NULL
+#if !defined(None)
+    #define None NULL
+#endif
 
 typedef unsigned int uint;
 
@@ -32,6 +34,7 @@ class FGWindow
 			inline MSG getMessage() const { return m_message; }
 		#elif defined(LINUX)
 			inline bool getMessage() const { return true; }
+            Display* getWindowDisplayer();
 		#endif
 		
 		void showThisFuckingWindow();

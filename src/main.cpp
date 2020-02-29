@@ -31,21 +31,28 @@ int main()
 	
 	myWin.updateWindow();
 	
+#if defined(WINDOWS)
 	Text myBeautifulText("Hello, world !");
+<<<<<<< HEAD
 	
 	//myBeautifulText.setPlacement(RectDescription(0, 0, 50, 50));
 	myBeautifulText.setX(50);
 	myBeautifulText.setY(50);
 	myBeautifulText.setHeight(50);
 	myBeautifulText.setWidth(50);
+=======
+
+	myBeautifulText.setPlacement(RectDescription(0, 0, 300, 400));
+>>>>>>> refs/remotes/origin/master
 	myBeautifulText.setUnderlining(true);
 	myBeautifulText.setFont("Arial");
 	myBeautifulText.setColor(RGB(255, 0, 0));
 	
 	myBeautifulText.draw(myWin);
 	//myWin.drawText("Hello, world !");
-	
+
 	myWin.redraw();
+#endif	
 	
 	std::thread threadEventGestion(wsh, std::ref(myWin));
 	

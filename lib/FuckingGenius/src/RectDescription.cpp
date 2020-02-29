@@ -26,7 +26,9 @@ RectDescription RectDescription::haveWindowRect(FGWindow win)
 		
 		return RectDescription(rectRes.left, rectRes.top, rectRes.right, rectRes.bottom);
 	#elif defined(LINUX)
-		return RectDescription(0, 0, 0, 0);
+        XWindowAttributes attribs;
+        XGetWindowAttributes(win.getWindowDisplayer(), win.getWinPainting(), &attribs);
+		return RectDescription(attribs.x, attribs.y, attribs.x+attribs.width, attribs.y+attribs.height);
 	#endif
 }
 
