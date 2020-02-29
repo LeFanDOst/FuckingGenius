@@ -28,6 +28,15 @@ FGWin returnAWin()
 	#endif
 }
 
+
+#if defined(LINUX)
+    Display* FGWindow::getWindowDisplayer()
+    {
+        return m_displayer;
+    }
+#endif
+
+
 #if defined(WINDOWS)
 	/*void UpdateGraph(HWND hwnd, HDC dc)
 	{

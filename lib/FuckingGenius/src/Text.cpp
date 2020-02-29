@@ -82,5 +82,8 @@ void Text::paintToWindow(FGWindow& win) const
 		TextOut(hdc, m_rectPlacement.getLeft(), m_rectPlacement.getTop(), m_string.c_str(), m_string.length());
 		
 		EndPaint(win.getWinPainting(), &ps);
+    #elif defined(LINUX)
+        if(sizeof(win)!=0)
+        {}
 	#endif
 }

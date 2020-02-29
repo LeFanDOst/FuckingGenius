@@ -16,7 +16,7 @@
 		HINSTANCE window;
 	};*/
 #elif defined(LINUX)
-	typedef Window FGWin;
+    #define FGWin Window
 	typedef unsigned char FGHandler;
 	typedef char const* FGTitle;
 	/*struct GuiInfo
