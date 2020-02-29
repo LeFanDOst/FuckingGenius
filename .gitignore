@@ -1,0 +1,8 @@
+# object files
+*.o
+*.a
+main
+
+# Editor generated files
+*.swp
+tags
