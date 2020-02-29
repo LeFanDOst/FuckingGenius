@@ -234,6 +234,8 @@ void FGWindow::drawText(std::string mig)
 		// Surface and dc liberation.
 		EndPaint(m_mainWindow, &ps);*/
 		
-		
+    #elif defined(LINUX)
+        if(mig.empty())
+            throw _FGExcept("Holy shit");
 	#endif
 }

@@ -1,12 +1,12 @@
 ifeq ($(OS),Windows_NT)
-	export Linux=no
-	UNAME_S = Windows_NT
+    export Linux=no
+    UNAME_S = Windows_NT
 else
-	UNAME_S=$(shell uname -s)
+    UNAME_S=$(shell uname -s)
 endif
 
 ifeq ($(UNAME_S),Linux)
-	export Linux=yes
+    export Linux=yes
 endif
 
 export Raspbian=no
