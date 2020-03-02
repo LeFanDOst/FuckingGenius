@@ -8,10 +8,6 @@
 #include "Values/BasicValues.hpp"
 #include "FGExcept.hpp"
 
-#if defined(LINUX)
-	#include <X11/Xlib.h>
-#endif
-
 #if !defined(None)
     #define None NULL
 #endif
@@ -34,10 +30,11 @@ class FGWindow
 			inline MSG getMessage() const { return m_message; }
 		#elif defined(LINUX)
 			inline bool getMessage() const { return true; }
-            Display* getWindowDisplayer();
+			Display* getWindowDisplayer();
 		#endif
 		
 		void showThisFuckingWindow();
+		void hideThisFuckingWindow();
 		void updateWindow();
 		void drawText(std::string mig);
 		void redraw();

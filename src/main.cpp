@@ -35,7 +35,22 @@ int main()
 			msg = myWin.getMessage();
 		}
 	#elif defined(LINUX)
-		
+		XEvent evmt;XSelectInput(myWin.getWindowDisplayer(),myWin.getWinPainting(),ButtonPressMask| EnterWindowMask| LeaveWindowMask);
+		for (;;)
+		{
+			XNextEvent(myWin.getWindowDisplayer(), &evmt);
+			switch(evmt.type)
+			{
+				case ButtonPress :
+					exit(0);
+				case EnterNotify:
+					XSetWindowBorderWidth(myWin.getWindowDisplayer(),myWin.getWinPainting(),4);
+				break;
+				case LeaveNotify:
+					XSetWindowBorderWidth(myWin.getWindowDisplayer(),myWin.getWinPainting(),2);
+				break;
+			}
+		}
 	#endif
 	
 	return 0;

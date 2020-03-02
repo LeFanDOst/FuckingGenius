@@ -5,6 +5,8 @@
 
 #if defined(WINDOWS)
 	#include <windows.h>
+#elif defined(LINUX)
+	#include <X11/Xlib.h>
 #endif
 
 #if defined(WINDOWS)
@@ -16,7 +18,7 @@
 		HINSTANCE window;
 	};*/
 #elif defined(LINUX)
-    #define FGWin Window
+    	typedef Window FGWin;
 	typedef unsigned char FGHandler;
 	typedef char const* FGTitle;
 	/*struct GuiInfo

@@ -186,6 +186,15 @@ void FGWindow::showThisFuckingWindow()
 {
 	#if defined(WINDOWS)
 		ShowWindow(m_mainWindow, SW_SHOW);
+	#elif defined(LINUX)
+		XMapWindow(m_displayer, m_mainWindow);
+	#endif
+}
+
+void FGWindow::hideThisFuckingWindow()
+{
+	#if defined(LINUX)
+		XUnmapWindow(m_displayer, m_mainWindow);
 	#endif
 }
 
